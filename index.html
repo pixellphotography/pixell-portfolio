@@ -226,28 +226,34 @@ footer a{color:#fff;text-decoration:underline}
 </div>
 
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
   const photos = Array.from(document.querySelectorAll(".gallery img"));
   const lightbox = document.getElementById("lightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
+  const image = document.getElementById("lightboxImage");
   const closeButton = document.getElementById("lightboxClose");
 
-  if (!photos.length || !lightbox || !lightboxImage || !closeButton) {
+  if (!photos.length || !lightbox || !image || !closeButton) {
     console.error("Elemen galeri atau lightbox tidak ditemukan.");
     return;
   }
 
+  // Pastikan indikator dan navigasi tidak dibuat berulang.
+  lightbox.querySelectorAll(
+    ".lightbox-nav, .lightbox-counter"
+  ).forEach(el => el.remove());
+
   let currentIndex = 0;
 
   const prev = document.createElement("button");
-  prev.className = "lightbox-nav lightbox-prev";
   prev.type = "button";
+  prev.className = "lightbox-nav lightbox-prev";
   prev.textContent = "❮";
   prev.setAttribute("aria-label", "Foto sebelumnya");
 
   const next = document.createElement("button");
-  next.className = "lightbox-nav lightbox-next";
   next.type = "button";
+  next.className = "lightbox-nav lightbox-next";
   next.textContent = "❯";
   next.setAttribute("aria-label", "Foto berikutnya");
 
@@ -258,12 +264,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showPhoto(index) {
     currentIndex = (index + photos.length) % photos.length;
-    lightboxImage.src = photos[currentIndex].src;
-    lightboxImage.alt = photos[currentIndex].alt || "Foto Pixell Photography";
-    counter.textContent = (currentIndex + 1) + " / " + photos.length;
+
+    const selectedPhoto = photos[currentIndex];
+
+    image.src = selectedPhoto.src;
+    image.alt = selectedPhoto.alt || "Foto Pixell Photography";
+
+    // Perbarui nomor setiap kali foto berganti.
+    counter.textContent =
+      `${currentIndex + 1} / ${photos.length}`;
   }
 
-  function openPhoto(index) {
+  function openLightbox(index) {
     showPhoto(index);
     lightbox.classList.add("active");
     document.body.style.overflow = "hidden";
@@ -274,36 +286,38 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.overflow = "";
   }
 
-  photos.forEach(function (photo, index) {
-    photo.style.cursor = "zoom-in";
-    photo.addEventListener("click", function () {
-      openPhoto(index);
-    });
+  photos.forEach((photo, index) => {
+    photo.addEventListener("click", () => openLightbox(index));
   });
 
-  prev.addEventListener("click", function (event) {
+  prev.addEventListener("click", event => {
     event.stopPropagation();
     showPhoto(currentIndex - 1);
   });
 
-  next.addEventListener("click", function (event) {
+  next.addEventListener("click", event => {
     event.stopPropagation();
     showPhoto(currentIndex + 1);
   });
 
-  closeButton.addEventListener("click", closeLightbox);
+  closeButton.addEventListener("click", event => {
+    event.stopPropagation();
+    closeLightbox();
+  });
 
-  lightbox.addEventListener("click", function (event) {
+  lightbox.addEventListener("click", event => {
     if (event.target === lightbox) closeLightbox();
   });
 
-  document.addEventListener("keydown", function (event) {
+  document.addEventListener("keydown", event => {
     if (!lightbox.classList.contains("active")) return;
+
     if (event.key === "Escape") closeLightbox();
     if (event.key === "ArrowLeft") showPhoto(currentIndex - 1);
     if (event.key === "ArrowRight") showPhoto(currentIndex + 1);
   });
 });
+
 </script>
 
 <body>
