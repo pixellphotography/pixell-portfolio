@@ -92,6 +92,8 @@ footer a{color:#fff;text-decoration:underline}
 }
 
 /* Tampilan foto saat diklik */
+
+/* LIGHTBOX */
 #lightbox {
   display: none;
   position: fixed;
@@ -108,6 +110,7 @@ footer a{color:#fff;text-decoration:underline}
   display: flex;
 }
 
+/* Foto */
 #lightbox img {
   display: block;
   width: auto;
@@ -116,10 +119,12 @@ footer a{color:#fff;text-decoration:underline}
   object-fit: contain;
 }
 
-#lightbox .close {
-  position:Top-right;
-  top: 125px;
-  right: 16px;
+/* Tombol X - posisi awal */
+#lightbox .close,
+#lightbox #lightboxClose {
+  position: fixed;
+  top: 18px;
+  right: 22px;
   left: auto;
   bottom: auto;
   width: 44px;
@@ -127,30 +132,32 @@ footer a{color:#fff;text-decoration:underline}
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  background: rgba(0, 0, 0, .8);
+  border: none;
   border-radius: 50%;
   font-size: 32px;
   line-height: 1;
+  padding: 0;
   cursor: pointer;
   z-index: 10010;
 }
 
-/* Tombol navigasi lightbox */
+/* Tombol navigasi */
 .lightbox-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 48px;
   height: 58px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, .3);
   border-radius: 8px;
-  background: rgba(20, 20, 20, 0.65);
+  background: rgba(20, 20, 20, .65);
   color: #fff;
   font-size: 25px;
   cursor: pointer;
   z-index: 10001;
-  transition: background 0.2s ease;
+  transition: background .2s ease;
 }
 
 .lightbox-nav:hover {
@@ -165,6 +172,7 @@ footer a{color:#fff;text-decoration:underline}
   right: 22px;
 }
 
+/* Penghitung foto */
 .lightbox-counter {
   position: absolute;
   bottom: 22px;
@@ -176,12 +184,22 @@ footer a{color:#fff;text-decoration:underline}
   z-index: 10001;
 }
 
-#lightbox .close {
-  z-index: 10002;
-  cursor: pointer;
-}
-
 @media (max-width: 600px) {
+  #lightbox {
+    padding: 12px;
+  }
+
+  #lightbox img {
+    max-width: 90vw;
+    max-height: 72vh;
+  }
+
+  #lightbox .close,
+  #lightbox #lightboxClose {
+    top: 10px;
+    right: 10px;
+  }
+
   .lightbox-nav {
     width: 38px;
     height: 46px;
@@ -197,85 +215,6 @@ footer a{color:#fff;text-decoration:underline}
   }
 }
 
-#lightbox .close {
-  position: fixed;
-  top: 18px;
-  right: 22px;
-  z-index: 10010;
-  cursor: pointer;
-  color: #fff;
-  font-size: 42px;
-  line-height: 1;
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.55);
-  border-radius: 8px;
-}
-
-#lightbox img {
-  display: block;
-  max-width: 88vw;
-  max-height: 82vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  margin: auto;
-}
-
-@media (max-width: 600px) {
-  #lightbox .close {
-    top: 10px;
-    right: 10px;
-    font-size: 36px;
-  }
-
-  #lightbox img {
-    max-width: 90vw;
-    max-height: 72vh;
-  }
-}
-```css
-/* Tombol X di pojok kanan atas layar */
-#lightbox #lightboxClose {
-  position: fixed !important;
-  top: 120px !important;
-  right: 16px !important;
-  left: auto !important;
-  bottom: auto !important;
-  z-index: 10010 !important;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.75);
-  border-radius: 50%;
-  font-size: 32px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-/* Foto tetap di tengah layar */
-#lightbox {
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-#lightbox.active {
-  display: flex;
-}
-
-#lightbox #lightboxImage {
-  display: block;
-  max-width: 90vw;
-  max-height: 78vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  margin: auto;
-}
-```
 </style>
 </head>
 
