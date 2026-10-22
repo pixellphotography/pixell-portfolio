@@ -223,7 +223,49 @@ footer a{color:#fff;text-decoration:underline}
     max-height: 72vh;
   }
 }
+```css
+/* Tombol X di pojok kanan atas layar */
+#lightbox #lightboxClose {
+  position: fixed !important;
+  top: 120px !important;
+  right: 16px !important;
+  left: auto !important;
+  bottom: auto !important;
+  z-index: 10010 !important;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 50%;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
 
+/* Foto tetap di tengah layar */
+#lightbox {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#lightbox.active {
+  display: flex;
+}
+
+#lightbox #lightboxImage {
+  display: block;
+  max-width: 90vw;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: auto;
+}
+```
 </style>
 </head>
 
