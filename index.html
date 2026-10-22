@@ -470,10 +470,15 @@ document.addEventListener("DOMContentLoaded", function () {
   nextButton.textContent = "❯";
   nextButton.setAttribute("aria-label", "Foto berikutnya");
 
-  const counter = document.createElement("div");
+  lightbox.querySelectorAll(".lightbox-counter").forEach((item) => {
+  if (item !== counter) item.remove();
+});
+
+if (!counter) {
+  counter = document.createElement("div");
   counter.className = "lightbox-counter";
 
-  lightbox.append(prevButton, nextButton, counter);
+ lightbox.append(prevButton, nextButton, counter);
 
   function showPhoto(index) {
     currentIndex = (index + photos.length) % photos.length;
