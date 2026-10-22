@@ -126,6 +126,67 @@ footer a{color:#fff;text-decoration:underline}
   cursor: pointer;
 }
 
+/* Tombol navigasi lightbox */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 58px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(20, 20, 20, 0.65);
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  z-index: 10001;
+  transition: background 0.2s ease;
+}
+
+.lightbox-nav:hover {
+  background: #b99a62;
+}
+
+.lightbox-prev {
+  left: 22px;
+}
+
+.lightbox-next {
+  right: 22px;
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 2px;
+  z-index: 10001;
+}
+
+#lightbox .close {
+  z-index: 10002;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .lightbox-nav {
+    width: 38px;
+    height: 46px;
+    font-size: 20px;
+  }
+
+  .lightbox-prev {
+    left: 8px;
+  }
+
+  .lightbox-next {
+    right: 8px;
+  }
+}
+
 </style>
 </head>
 
@@ -138,39 +199,81 @@ footer a{color:#fff;text-decoration:underline}
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const galleryImages = document.querySelectorAll(".gallery img");
+  const photos = Array.from(document.querySelectorAll(".gallery img"));
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightboxImage");
   const closeButton = document.getElementById("lightboxClose");
 
-  if (!lightbox || !lightboxImage || !closeButton) {
-    console.error("Elemen lightbox tidak ditemukan.");
+  if (!photos.length || !lightbox || !lightboxImage || !closeButton) {
+    console.error("Elemen galeri atau lightbox tidak ditemukan.");
     return;
   }
 
-  galleryImages.forEach(function (photo) {
+  let currentIndex = 0;
+
+  const prev = document.createElement("button");
+  prev.className = "lightbox-nav lightbox-prev";
+  prev.type = "button";
+  prev.textContent = "❮";
+  prev.setAttribute("aria-label", "Foto sebelumnya");
+
+  const next = document.createElement("button");
+  next.className = "lightbox-nav lightbox-next";
+  next.type = "button";
+  next.textContent = "❯";
+  next.setAttribute("aria-label", "Foto berikutnya");
+
+  const counter = document.createElement("div");
+  counter.className = "lightbox-counter";
+
+  lightbox.append(prev, next, counter);
+
+  function showPhoto(index) {
+    currentIndex = (index + photos.length) % photos.length;
+    lightboxImage.src = photos[currentIndex].src;
+    lightboxImage.alt = photos[currentIndex].alt || "Foto Pixell Photography";
+    counter.textContent = (currentIndex + 1) + " / " + photos.length;
+  }
+
+  function openPhoto(index) {
+    showPhoto(index);
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  photos.forEach(function (photo, index) {
+    photo.style.cursor = "zoom-in";
     photo.addEventListener("click", function () {
-      lightboxImage.src = photo.src;
-      lightboxImage.alt = photo.alt;
-      lightbox.classList.add("active");
+      openPhoto(index);
     });
   });
 
-  closeButton.addEventListener("click", function (event) {
+  prev.addEventListener("click", function (event) {
     event.stopPropagation();
-    lightbox.classList.remove("active");
+    showPhoto(currentIndex - 1);
   });
 
+  next.addEventListener("click", function (event) {
+    event.stopPropagation();
+    showPhoto(currentIndex + 1);
+  });
+
+  closeButton.addEventListener("click", closeLightbox);
+
   lightbox.addEventListener("click", function (event) {
-    if (event.target === lightbox) {
-      lightbox.classList.remove("active");
-    }
+    if (event.target === lightbox) closeLightbox();
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      lightbox.classList.remove("active");
-    }
+    if (!lightbox.classList.contains("active")) return;
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") showPhoto(currentIndex - 1);
+    if (event.key === "ArrowRight") showPhoto(currentIndex + 1);
   });
 });
 </script>
@@ -294,36 +397,102 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 
 <script>
-  const galleryImages = document.querySelectorAll(".gallery img");
+document.addEventListener("DOMContentLoaded", function () {
+  const photos = Array.from(document.querySelectorAll(".gallery img"));
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightboxImage");
   const closeButton = document.getElementById("lightboxClose");
 
-  galleryImages.forEach(function(photo) {
-    photo.style.cursor = "zoom-in";
+  if (!photos.length || !lightbox || !lightboxImage || !closeButton) {
+    console.error("Elemen galeri atau lightbox tidak ditemukan.");
+    return;
+  }
 
-    photo.addEventListener("click", function() {
-      lightboxImage.src = photo.src;
-      lightboxImage.alt = photo.alt;
-      lightbox.classList.add("active");
+  let currentIndex = 0;
+
+  // Tambahkan tombol navigasi dan nomor foto
+  const prevButton = document.createElement("button");
+  prevButton.className = "lightbox-nav lightbox-prev";
+  prevButton.type = "button";
+  prevButton.textContent = "❮";
+  prevButton.setAttribute("aria-label", "Foto sebelumnya");
+
+  const nextButton = document.createElement("button");
+  nextButton.className = "lightbox-nav lightbox-next";
+  nextButton.type = "button";
+  nextButton.textContent = "❯";
+  nextButton.setAttribute("aria-label", "Foto berikutnya");
+
+  const counter = document.createElement("div");
+  counter.className = "lightbox-counter";
+
+  lightbox.append(prevButton, nextButton, counter);
+
+  function showPhoto(index) {
+    currentIndex = (index + photos.length) % photos.length;
+    const photo = photos[currentIndex];
+
+    lightboxImage.src = photo.src;
+    lightboxImage.alt = photo.alt || "Foto Pixell Photography";
+    counter.textContent = `${currentIndex + 1} / ${photos.length}`;
+  }
+
+  function openLightbox(index) {
+    showPhoto(index);
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+    closeButton.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  photos.forEach(function (photo, index) {
+    photo.style.cursor = "pointer";
+    photo.addEventListener("click", function () {
+      openLightbox(index);
     });
   });
 
-  closeButton.addEventListener("click", function() {
-    lightbox.classList.remove("active");
+  prevButton.addEventListener("click", function (event) {
+    event.stopPropagation();
+    showPhoto(currentIndex - 1);
   });
 
-  lightbox.addEventListener("click", function(event) {
+  nextButton.addEventListener("click", function (event) {
+    event.stopPropagation();
+    showPhoto(currentIndex + 1);
+  });
+
+  closeButton.addEventListener("click", function (event) {
+    event.stopPropagation();
+    closeLightbox();
+  });
+
+  lightbox.addEventListener("click", function (event) {
     if (event.target === lightbox) {
-      lightbox.classList.remove("active");
+      closeLightbox();
     }
   });
 
-  document.addEventListener("keydown", function(event) {
-    if (event.key === "Escape") {
-      lightbox.classList.remove("active");
+  document.addEventListener("keydown", function (event) {
+    if (!lightbox.classList.contains("active")) return;
+
+    if (event.key === "Escape") closeLightbox();
+
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showPhoto(currentIndex - 1);
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showPhoto(currentIndex + 1);
     }
   });
+});
 </script>
 
 </body>
