@@ -80,81 +80,49 @@ footer a{color:#fff;text-decoration:underline}
  nav{justify-content:flex-start}
  .services{grid-template-columns:1fr}
 }
-/* Galeri foto yang bisa diperbesar */
-.gallery a {
-  display: block;
-  overflow: hidden;
-  cursor: zoom-in;
-}
 
+/* Galeri foto yang bisa diperbesar */
 .gallery img {
+  cursor: zoom-in;
   transition: transform .3s ease;
 }
 
-.gallery a:hover img {
-  transform: scale(1.04);
+.gallery img:hover {
+  transform: scale(1.03);
 }
 
-.lightbox {
+/* Tampilan foto saat diklik */
+#lightbox {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 9999;
   background: rgba(20, 18, 17, .94);
-  display: none;
   align-items: center;
   justify-content: center;
   padding: 24px;
+  cursor: zoom-out;
 }
 
-.lightbox.active {
+#lightbox.active {
   display: flex;
 }
 
-.lightbox img {
+#lightbox img {
+  display: block;
   width: auto;
   max-width: 94vw;
   max-height: 88vh;
   object-fit: contain;
 }
 
-.lightbox-close {
-  position: absolute;
-  top: 18px;
-  right: 25px;
-  color: white;
-  font-size: 36px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.gallery img {
-  cursor: zoom-in;
-}
-#lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.9);
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-#lightbox.active {
-  display: flex;
-}
-#lightbox img {
-  max-width: 95%;
-  max-height: 90vh;
-  object-fit: contain;
-}
 #lightbox .close {
   position: absolute;
-  top: 15px;
-  right: 25px;
+  top: 12px;
+  right: 24px;
   color: white;
   font-size: 40px;
+  line-height: 1;
   cursor: pointer;
 }
 
@@ -311,5 +279,44 @@ document.addEventListener('keydown', event => {
   <p>Instagram: <a href="https://www.instagram.com/pixell_photography.jkt/" target="_blank" rel="noopener">@pixell_photography.jkt</a></p>
   <p>© 2026 Pixell Photography</p>
 </footer>
+
+<div id="lightbox">
+  <span class="close" id="lightboxClose">&times;</span>
+  <img id="lightboxImage" src="" alt="Foto diperbesar">
+</div>
+
+<script>
+  const galleryImages = document.querySelectorAll(".gallery img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const closeButton = document.getElementById("lightboxClose");
+
+  galleryImages.forEach(function(photo) {
+    photo.style.cursor = "zoom-in";
+
+    photo.addEventListener("click", function() {
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.alt;
+      lightbox.classList.add("active");
+    });
+  });
+
+  closeButton.addEventListener("click", function() {
+    lightbox.classList.remove("active");
+  });
+
+  lightbox.addEventListener("click", function(event) {
+    if (event.target === lightbox) {
+      lightbox.classList.remove("active");
+    }
+  });
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      lightbox.classList.remove("active");
+    }
+  });
+</script>
+
 </body>
 </html>
