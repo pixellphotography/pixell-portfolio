@@ -187,6 +187,43 @@ footer a{color:#fff;text-decoration:underline}
   }
 }
 
+#lightbox .close {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 10010;
+  cursor: pointer;
+  color: #fff;
+  font-size: 42px;
+  line-height: 1;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 8px;
+}
+
+#lightbox img {
+  display: block;
+  max-width: 88vw;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: auto;
+}
+
+@media (max-width: 600px) {
+  #lightbox .close {
+    top: 10px;
+    right: 10px;
+    font-size: 36px;
+  }
+
+  #lightbox img {
+    max-width: 90vw;
+    max-height: 72vh;
+  }
+}
+
 </style>
 </head>
 
