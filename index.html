@@ -137,33 +137,41 @@ footer a{color:#fff;text-decoration:underline}
 </div>
 
 <script>
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightboxImage');
-const closeButton = document.getElementById('lightboxClose');
+document.addEventListener("DOMContentLoaded", function () {
+  const galleryImages = document.querySelectorAll(".gallery img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const closeButton = document.getElementById("lightboxClose");
 
-document.querySelectorAll('.gallery a').forEach(link => {
-  link.addEventListener('click', event => {
-    event.preventDefault();
-    const image = link.querySelector('img');
-    lightboxImage.src = image.src;
-    lightboxImage.alt = image.alt;
-    lightbox.classList.add('active');
+  if (!lightbox || !lightboxImage || !closeButton) {
+    console.error("Elemen lightbox tidak ditemukan.");
+    return;
+  }
+
+  galleryImages.forEach(function (photo) {
+    photo.addEventListener("click", function () {
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.alt;
+      lightbox.classList.add("active");
+    });
   });
-});
 
-function closeLightbox() {
-  lightbox.classList.remove('active');
-  lightboxImage.src = '';
-}
+  closeButton.addEventListener("click", function (event) {
+    event.stopPropagation();
+    lightbox.classList.remove("active");
+  });
 
-closeButton.addEventListener('click', closeLightbox);
+  lightbox.addEventListener("click", function (event) {
+    if (event.target === lightbox) {
+      lightbox.classList.remove("active");
+    }
+  });
 
-lightbox.addEventListener('click', event => {
-  if (event.target === lightbox) closeLightbox();
-});
-
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') closeLightbox();
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      lightbox.classList.remove("active");
+    }
+  });
 });
 </script>
 
