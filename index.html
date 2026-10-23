@@ -215,6 +215,44 @@ footer a{color:#fff;text-decoration:underline}
   }
 }
 
+/* GALERI PIXELL PHOTOGRAPHY */
+.gallery-category {
+  margin-top: 48px;
+}
+
+.gallery-title {
+  margin-bottom: 20px;
+  font-size: 22px;
+  letter-spacing: 3px;
+}
+
+.gallery-category .extra-photo {
+  display: none;
+}
+
+.gallery-category.expanded .extra-photo {
+  display: block;
+}
+
+.gallery-more {
+  display: block;
+  margin: 28px auto 0;
+  padding: 13px 24px;
+  border: 1px solid #b99a62;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.gallery-more:hover {
+  background: #b99a62;
+  color: #fff;
+}
+
 </style>
 </head>
 
@@ -376,22 +414,98 @@ document.addEventListener("DOMContentLoaded", function () {
 </section>
 
 
+
 <section id="gallery">
   <div class="gallery-wrap">
-    <div class="label">Portofolio</div>
+    <div class="label">PORTOFOLIO</div>
     <h2 class="heading">Kumpulan Momen Spesial</h2>
-    <p class="muted">Beberapa contoh foto. Nantinya ganti dengan karya asli Pixell.</p>
+    <p class="muted">Setiap momen punya cerita. Temukan ceritamu bersama Pixell.</p>
 
-    <div class="gallery">
-      <img src="1%20copy.jpg" alt="Foto Wedding Pixell">
-      <img src="2%20copy.jpg" alt="Foto Wedding Pixell">
-      <img src="3%20copy.jpg" alt="Foto Wedding Pixell">
-      <img src="4%20copy.jpg" alt="Foto Wedding Pixell">
-      <img src="5%20copy.jpg" alt="Foto Wedding Pixell">
-      <img src="6%20copy.jpg" alt="Foto Wedding Pixell">
+    <!-- WEDDING -->
+    <div class="gallery-category">
+      <h3 class="gallery-title">WEDDING</h3>
+      <div class="gallery">
+        <img src="1%20copy.jpg" alt="Wedding Pixell 1">
+        <img src="2%20copy.jpg" alt="Wedding Pixell 2">
+        <img src="3%20copy.jpg" alt="Wedding Pixell 3">
+        <img src="4%20copy.jpg" alt="Wedding Pixell 4">
+        <img src="5%20copy.jpg" alt="Wedding Pixell 5">
+        <img src="6%20copy.jpg" alt="Wedding Pixell 6">
+
+        <!-- Foto tambahan Wedding: ganti nama file sesuai foto di GitHub -->
+        <img class="extra-photo" src="7%20copy.jpg" alt="Wedding Pixell 7">
+        <img class="extra-photo" src="8%20copy.jpg" alt="Wedding Pixell 8">
+        <img class="extra-photo" src="9%20copy.jpg" alt="Wedding Pixell 9">
+      </div>
+      <button class="gallery-more" type="button">LIHAT SEMUA WEDDING ↓</button>
     </div>
+
+    <!-- WISUDA -->
+    <div class="gallery-category">
+      <h3 class="gallery-title">WISUDA</h3>
+      <div class="gallery">
+        <img src="wisuda-1.jpg" alt="Wisuda Pixell 1">
+        <img src="wisuda-2.jpg" alt="Wisuda Pixell 2">
+        <img src="wisuda-3.jpg" alt="Wisuda Pixell 3">
+        <img src="wisuda-4.jpg" alt="Wisuda Pixell 4">
+        <img src="wisuda-5.jpg" alt="Wisuda Pixell 5">
+        <img src="wisuda-6.jpg" alt="Wisuda Pixell 6">
+
+        <img class="extra-photo" src="wisuda-7.jpg" alt="Wisuda Pixell 7">
+        <img class="extra-photo" src="wisuda-8.jpg" alt="Wisuda Pixell 8">
+        <img class="extra-photo" src="wisuda-9.jpg" alt="Wisuda Pixell 9">
+      </div>
+      <button class="gallery-more" type="button">LIHAT SEMUA WISUDA ↓</button>
+    </div>
+
+    <!-- PREWEDDING -->
+    <div class="gallery-category">
+      <h3 class="gallery-title">PREWEDDING</h3>
+      <div class="gallery">
+        <img src="prewedding-1.jpg" alt="Prewedding Pixell 1">
+        <img src="prewedding-2.jpg" alt="Prewedding Pixell 2">
+        <img src="prewedding-3.jpg" alt="Prewedding Pixell 3">
+        <img src="prewedding-4.jpg" alt="Prewedding Pixell 4">
+        <img src="prewedding-5.jpg" alt="Prewedding Pixell 5">
+        <img src="prewedding-6.jpg" alt="Prewedding Pixell 6">
+        <img class="extra-photo" src="prewedding-7.jpg" alt="Prewedding Pixell 7">
+      </div>
+      <button class="gallery-more" type="button">LIHAT SEMUA PREWEDDING ↓</button>
+    </div>
+
+    <!-- EVENT -->
+    <div class="gallery-category">
+      <h3 class="gallery-title">EVENT</h3>
+      <div class="gallery">
+        <img src="event-1.jpg" alt="Event Pixell 1">
+        <img src="event-2.jpg" alt="Event Pixell 2">
+        <img src="event-3.jpg" alt="Event Pixell 3">
+        <img src="event-4.jpg" alt="Event Pixell 4">
+        <img src="event-5.jpg" alt="Event Pixell 5">
+        <img src="event-6.jpg" alt="Event Pixell 6">
+        <img class="extra-photo" src="event-7.jpg" alt="Event Pixell 7">
+      </div>
+      <button class="gallery-more" type="button">LIHAT SEMUA EVENT ↓</button>
+    </div>
+
+    <!-- SEKOLAH -->
+    <div class="gallery-category">
+      <h3 class="gallery-title">SEKOLAH</h3>
+      <div class="gallery">
+        <img src="sekolah-1.jpg" alt="Sekolah Pixell 1">
+        <img src="sekolah-2.jpg" alt="Sekolah Pixell 2">
+        <img src="sekolah-3.jpg" alt="Sekolah Pixell 3">
+        <img src="sekolah-4.jpg" alt="Sekolah Pixell 4">
+        <img src="sekolah-5.jpg" alt="Sekolah Pixell 5">
+        <img src="sekolah-6.jpg" alt="Sekolah Pixell 6">
+        <img class="extra-photo" src="sekolah-7.jpg" alt="Sekolah Pixell 7">
+      </div>
+      <button class="gallery-more" type="button">LIHAT SEMUA SEKOLAH ↓</button>
+    </div>
+
   </div>
 </section>
+
 
 
 <section class="packages-section" id="packages">
