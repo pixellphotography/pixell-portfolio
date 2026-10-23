@@ -355,7 +355,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.key === "ArrowRight") showPhoto(currentIndex + 1);
   });
 });
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".gallery-category").forEach(function (category) {
+    const button = category.querySelector(".gallery-more");
+    const extraPhotos = category.querySelectorAll(".extra-photo");
 
+    if (!button || extraPhotos.length === 0) return;
+
+    button.addEventListener("click", function () {
+      const expanded = category.classList.toggle("expanded");
+
+      button.textContent = expanded
+        ? "TAMPILKAN LEBIH SEDIKIT ↑"
+        : "LIHAT SEMUA " + category.querySelector(".gallery-title").textContent + " ↓";
+    });
+  });
+});
 </script>
 
 <body>
