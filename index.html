@@ -283,6 +283,35 @@ footer a{color:#fff;text-decoration:underline}
   position: relative;
 }
 
+/* SCROLL DI BAWAH TOMBOL HERO */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+.scroll-line {
+  font-size: 20px;
+  line-height: 1;
+  animation: scrollDown 1s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
 </style>
 </head>
 
@@ -428,15 +457,9 @@ document.addEventListener("DOMContentLoaded", function () {
   <a class="btn" href="https://wa.me/6283124079725" target="_blank" rel="noopener">CHAT WHATSAPP ↗</a>
 </div>
 
-  </div>
-
   <div class="scroll-indicator">
     <span>SCROLL</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<section id="about">
+    <div class="scroll-line">↓</div>
   </div>
 </section>
 
